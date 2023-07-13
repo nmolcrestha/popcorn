@@ -52,8 +52,17 @@ export default function App() {
 
   return (
     <>
-    <Navgation movies={movies}/>
-    <Main movies={movies}/>
+    <Navgation >
+      
+      <Search/>
+      <NumResults movies={movies}/>
+    </Navgation>
+    <Main>
+      <ListBox>
+        <MovieList movies={movies}/>
+      </ListBox>
+      <WactchedBox/> 
+    </Main>
     </>
   );
 }
@@ -61,13 +70,12 @@ export default function App() {
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-  const Navgation = ({movies}) => {
+  const Navgation = ({children}) => {
     
     return(
       <nav className="nav-bar">
         <Logo/>
-        <Search/>
-        <NumResults movies={movies}/>
+        {children}
     </nav>
     );
   }
@@ -104,7 +112,7 @@ const average = (arr) =>
     );
   }
 
-  const ListBox = ({movies}) => {
+  const ListBox = ({children}) => {
     const [isOpen1, setIsOpen1] = useState(true);
 
     return(
@@ -115,7 +123,7 @@ const average = (arr) =>
       >
         {isOpen1 ? "–" : "+"}
       </button>
-      {isOpen1 && <MovieList movies={movies}/>}
+      {isOpen1 && children}
     </div>
     );
   }
@@ -226,12 +234,11 @@ const average = (arr) =>
     );
   }
 
-  const Main = ({movies}) => {
+  const Main = ({children}) => {
 
     return (
       <main className="main">
-        <ListBox movies={movies}/>
-        <WactchedBox/> 
+        {children}
     </main>
     )
   }
