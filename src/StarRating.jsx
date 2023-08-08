@@ -12,11 +12,12 @@ const starContainerStyle = {
 
 
 
-const StarRating = ({ maxRating = 5, color='#fcc419', size=48 }) => {
+const StarRating = ({ maxRating = 5, color='#fcc419', size=48 , onSetRating}) => {
     const [rating, setRating] = useState(0);
     const [tempRating, setTempRating] = useState(0);
     function handlerating(rating){
         setRating(rating);
+        onSetRating(rating);
     }
 
     const textStyle = {
